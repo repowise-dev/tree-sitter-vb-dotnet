@@ -34,6 +34,7 @@ module.exports = grammar({
     [$.type, $.array_type],
     [$.if_statement, $.binary_expression],
     [$.empty_statement, $.if_statement],
+    [$.class_block, $._member_declaration],
     [$.namespace_name, $.attribute],
     [$.namespace_name],
   ],
@@ -113,8 +114,19 @@ module.exports = grammar({
       kw('Class'),
       field('name', $.identifier),
       optional($.type_parameters),
-      optional(field('inherits', $.inherits_clause)),
-      optional(field('implements', $.implements_clause)),
+      // `Inherits`/`Implements` may sit on the same line as the class name or
+      // on their own lines — the canonical VB.NET layout is one per line, and
+      // the header must keep consuming them before the member list starts.
+      optional(seq(
+        optional($._terminator),
+        field('inherits', $.inherits_clause),
+        optional($._terminator),
+        optional(field('implements', $.implements_clause))
+      )),
+      optional(seq(
+        optional($._terminator),
+        field('implements', $.implements_clause)
+      )),
       $._terminator,
       repeat($._member_declaration),
       kw('End'), kw('Class'), $._terminator
@@ -136,7 +148,10 @@ module.exports = grammar({
       kw('Structure'),
       field('name', $.identifier),
       optional($.type_parameters),
-      optional(field('implements', $.implements_clause)),
+      optional(seq(
+        optional($._terminator),
+        field('implements', $.implements_clause)
+      )),
       $._terminator,
       repeat($._member_declaration),
       kw('End'), kw('Structure'), $._terminator
@@ -148,7 +163,10 @@ module.exports = grammar({
       kw('Interface'),
       field('name', $.identifier),
       optional($.type_parameters),
-      optional(field('inherits', $.inherits_clause)), // interfaces can inherit multiple interfaces
+      optional(seq(
+        optional($._terminator),
+        field('inherits', $.inherits_clause) // interfaces can inherit multiple interfaces
+      )),
       $._terminator,
       repeat($._member_declaration),
       kw('End'), kw('Interface'), $._terminator
@@ -274,7 +292,14 @@ module.exports = grammar({
       optional(seq('=', field('initializer', $.expression)))
     ),
     array_rank_specifier: $ => seq('(', optional(repeat(',')), ')'),  // e.g. "()" or "(,)" for array dimensions
-    as_clause: $ => seq(kw('As'), field('type', $.type)),
+    as_clause: $ => seq(
+      kw('As'),
+      choice(
+        field('type', $.type),
+        // `As New List(Of String)()` — object-initializer form, no `=`.
+        seq(kw('New'), field('type', $.type), optional($.argument_list))
+      )
+    ),
 
     // Type (for variables, parameters, return types, etc.)
     type: $ => choice(
@@ -302,7 +327,7 @@ module.exports = grammar({
       kw('Char'), kw('String'),
       kw('Object'), kw('Date')
     )),
-    type_argument_list: $ => seq(kw('Of'), commaSep1($.type)),
+    type_argument_list: $ => seq('(', kw('Of'), commaSep1($.type), ')'),
 
     // Method (Sub/Function) declaration inside a class/module or as a procedure in a module
     method_declaration: $ => seq(

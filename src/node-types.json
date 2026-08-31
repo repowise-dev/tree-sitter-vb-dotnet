@@ -127,6 +127,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_list",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -422,7 +432,7 @@
     "named": true,
     "fields": {
       "implements": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {

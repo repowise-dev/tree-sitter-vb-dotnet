@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-vb-dotnet"
 description = "Tree sitter grammar for VB.NET"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["CodeAnt AI <chinmay@codeant.ai>"]
 license = "MIT"
 readme = "README.md"

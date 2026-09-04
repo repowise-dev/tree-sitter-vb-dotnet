@@ -1,0 +1,244 @@
+==================
+Imports and Option after comments
+==================
+
+' a leading comment
+Imports System
+
+Option Strict On
+Imports Other.Space
+
+---
+
+(source_file
+  (blank_line)
+  (comment)
+  (blank_line)
+  (imports_statement
+    namespace: (namespace_name
+      (identifier)))
+  (blank_line)
+  (option_statements)
+  (imports_statement
+    namespace: (namespace_name
+      (identifier)
+      (identifier))))
+
+==================
+Non-ASCII identifiers
+==================
+
+Public Class 上下文
+    Private 名前 As String
+End Class
+
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (field_declaration
+        modifiers: (modifiers
+          (modifier))
+        (variable_declarator
+          name: (identifier)
+          (as_clause
+            type: (type
+              (primitive_type))))))))
+
+==================
+Region directives
+==================
+
+Public Class A
+#Region "members"
+    Private X As Integer
+#End Region
+End Class
+
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (preprocessor_directive)
+      (blank_line)
+      (field_declaration
+        modifiers: (modifiers
+          (modifier))
+        (variable_declarator
+          name: (identifier)
+          (as_clause
+            type: (type
+              (primitive_type)))))
+      (preprocessor_directive)
+      (blank_line))))
+
+==================
+Generic parameters and arguments
+==================
+
+Public Class A
+    Public Sub Bar(Of T)(ByVal x As T)
+        Dim q = Foo.Bar(Of Integer)()
+    End Sub
+End Class
+
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (method_declaration
+        modifiers: (modifiers
+          (modifier))
+        name: (identifier)
+        (type_parameters
+          (type_parameter
+            name: (identifier)))
+        parameters: (parameter_list
+          (parameter
+            name: (identifier)
+            (as_clause
+              type: (type
+                (namespace_name
+                  (identifier))))))
+        (statement
+          (dim_statement
+            name: (identifier)
+            initializer: (expression
+              (element_access
+                object: (expression
+                  (invocation
+                    target: (member_access
+                      object: (expression
+                        (identifier))
+                      member: (identifier))
+                    type_arguments: (type_argument_list
+                      (type
+                        (primitive_type)))))))))))))
+
+==================
+Handles clause
+==================
+
+Public Class A
+    Private WithEvents Baz As Button
+    Private Sub OnClick() Handles Baz.Click
+    End Sub
+End Class
+
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (field_declaration
+        modifiers: (modifiers
+          (modifier)
+          (modifier))
+        (variable_declarator
+          name: (identifier)
+          (as_clause
+            type: (type
+              (namespace_name
+                (identifier))))))
+      (method_declaration
+        modifiers: (modifiers
+          (modifier))
+        name: (identifier)
+        parameters: (parameter_list)
+        (handles_clause
+          (namespace_name
+            (identifier)
+            (identifier)))))))
+
+==================
+Collection initialiser and omitted arguments
+==================
+
+Public Class A
+    Sub B()
+        Dim l As New List(Of String) From {"a", "b"}
+        Call A(, , B)
+    End Sub
+End Class
+
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (method_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        (statement
+          (dim_statement
+            name: (identifier)
+            (as_clause
+              type: (type
+                (generic_type
+                  (namespace_name
+                    (identifier))
+                  (type_argument_list
+                    (type
+                      (primitive_type)))))
+              (object_initializers
+                (object_initializer
+                  (expression
+                    (literal
+                      (string_literal))))
+                (object_initializer
+                  (expression
+                    (literal
+                      (string_literal))))))))
+        (statement
+          (call_statement
+            (expression
+              (invocation
+                target: (identifier)
+                arguments: (argument_list
+                  (argument
+                    (expression
+                      (identifier))))))))))))
+
+==================
+A file that ends without a trailing newline
+==================
+
+Public Module M
+    Sub Go()
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      modifiers: (modifiers
+        (modifier))
+      name: (identifier)
+      (method_declaration
+        name: (identifier)
+        parameters: (parameter_list)))))

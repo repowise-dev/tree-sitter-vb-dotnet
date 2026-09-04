@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-vb-dotnet"
 description = "Tree sitter grammar for VB.NET"
-version = "0.2.0"
+version = "0.3.0"
 keywords = ["incremental", "parsing", "tree-sitter", "tree-sitter-vb-dotnet"]
 classifiers = [
   "Intended Audience :: Developers",

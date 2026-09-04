@@ -29,3 +29,22 @@ Bug reports / PRs are very welcome!
 
 ```bash
 npm install tree-sitter tree-sitter-vb-dotnet   # parser + runtime
+```
+
+## Python package
+
+```bash
+pip install tree-sitter-vb-dotnet
+```
+
+```python
+import tree_sitter
+import tree_sitter_vb_dotnet
+
+language = tree_sitter.Language(tree_sitter_vb_dotnet.language())
+```
+
+This fork of [rrangraj/tree-sitter-vb-dotnet](https://github.com/rrangraj/tree-sitter-vb-dotnet)
+carries the binding fix and the real-world VB.NET grammar fixes contributed by
+[@sloemo01](https://github.com/sloemo01), and renames the Python module from the
+generator's doubled `tree_sitter_tree_sitter_vb_dotnet` to `tree_sitter_vb_dotnet`.

@@ -7,7 +7,7 @@ typedef struct TSLanguage TSLanguage;
 extern "C" {
 #endif
 
-const TSLanguage *tree_sitter_tree_sitter_vb_dotnet(void);
+const TSLanguage *tree_sitter_vb_dotnet(void);
 
 #ifdef __cplusplus
 }

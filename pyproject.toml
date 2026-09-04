@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-vb-dotnet"
 description = "Tree sitter grammar for VB.NET"
-version = "0.1.0"
+version = "0.2.0"
 keywords = ["incremental", "parsing", "tree-sitter", "tree-sitter-vb-dotnet"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -19,7 +19,7 @@ license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://github.com/tree-sitter/tree-sitter-tree_sitter_vb_dotnet"
+Homepage = "https://github.com/repowise-dev/tree-sitter-vb-dotnet"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.24"]

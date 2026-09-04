@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-tree_sitter_vb_dotnet
+module github.com/repowise-dev/tree-sitter-vb-dotnet
 
 go 1.22
 

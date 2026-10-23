@@ -2713,6 +2713,10 @@
           "named": true
         },
         {
+          "type": "query_ordering",
+          "named": true
+        },
+        {
           "type": "query_range",
           "named": true
         }
@@ -2733,6 +2737,21 @@
         },
         {
           "type": "query_range",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_ordering",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]

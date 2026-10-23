@@ -951,7 +951,7 @@ module.exports = grammar({
     query_range: $ => seq(
       field('name', $.identifier),
       optional($.as_clause),
-      kw('In'),
+      qkw('In'),
       field('source', $.expression)
     ),
     // Each clause keyword may carry the line break that precedes it, so a query
@@ -961,12 +961,15 @@ module.exports = grammar({
       seq(qkw('Where'), $.expression),
       seq(qkw('Let'), field('name', $.identifier), '=', $.expression),
       seq(qkw('Select'), optional(seq(field('name', $.identifier), '=')), $.expression),
-      seq(qkw('Order'), kw('By'), $.expression, optional(choice(kw('Ascending'), kw('Descending')))),
+      seq(qkw('Order'), kw('By'), $.query_ordering, repeat(seq(comma(), $.query_ordering))),
       seq(qkw('Group'), kw('By'), $.expression, kw('Into'), optional(seq(field('name', $.identifier), '=')), $.expression),
       seq(qkw('Take'), optional(kw('While')), $.expression),
       seq(qkw('Skip'), optional(kw('While')), $.expression),
       qkw('Distinct')
     )),
+
+    // One sort key of `Order By a Descending, b`
+    query_ordering: $ => prec.right(seq($.expression, optional(choice(kw('Ascending'), kw('Descending'))))),
 
     // `Await Task.Delay(1)`
     await_expression: $ => prec.right(9, seq(kw('Await'), field('operand', $.expression))),

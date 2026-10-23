@@ -223,6 +223,219 @@ End Class
                       (identifier))))))))))))
 
 ==================
+String literal spanning two lines
+==================
+
+Public Module M
+    Function F() As String
+        Return "first
+second"
+    End Function
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (type
+          (primitive_type))
+        (statement
+          (return_statement
+            (expression
+              (literal
+                (string_literal)))))))))
+
+==================
+Multi-line string with quotes, parentheses and an escaped quote
+==================
+
+Module M
+    Function F() As String
+        Dim ls As String = ""
+        ls = ls & "SELECT a
+  FROM t WHERE x = isnull(T1.U_P, '19000101') AND y = ""q""" & vbCrLf
+        Return ls
+    End Function
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (type
+          (primitive_type))
+        (statement
+          (dim_statement
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (string_literal)))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (binary_expression
+                    (expression
+                      (binary_expression
+                        (expression
+                          (identifier))
+                        (expression
+                          (literal
+                            (string_literal)))))
+                    (expression
+                      (identifier))))))))
+        (statement
+          (return_statement
+            (expression
+              (identifier))))))))
+
+==================
+Members after a multi-line string are still parsed
+==================
+
+Module M
+    Sub A()
+        Dim s As String = "x
+y"
+    End Sub
+
+    Sub B()
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (dim_statement
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (string_literal))))))
+      (blank_line)
+      (method_declaration
+        (identifier)
+        (parameter_list)))))
+
+==================
+Interpolated string spanning several lines
+==================
+
+Module M
+    Sub A(id As Integer)
+        Dim sSql As String = $"select a
+                  from t
+                  where code ='{id}'"
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (statement
+          (dim_statement
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (string_literal
+                  (interpolated_string_literal
+                    (interpolation
+                      (expression
+                        (identifier)))))))))))))
+
+==================
+Members after a multi-line interpolated string are still parsed
+==================
+
+Module M
+    Sub A(d As Decimal)
+        Dim sSql As String = $"update a set x ={d}
+                  from t a
+                  where a.y = 'z'" & vbCrLf
+    End Sub
+
+    Sub B()
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (statement
+          (dim_statement
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (binary_expression
+                (expression
+                  (literal
+                    (string_literal
+                      (interpolated_string_literal
+                        (interpolation
+                          (expression
+                            (identifier)))))))
+                (expression
+                  (identifier)))))))
+      (blank_line)
+      (method_declaration
+        (identifier)
+        (parameter_list)))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

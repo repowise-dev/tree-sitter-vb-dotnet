@@ -964,6 +964,7 @@ module.exports = grammar({
       $.binary_expression,
       $.ternary_expression,
       $.new_expression,
+      $.anonymous_object_creation,
       $.lambda_expression,
       $.array_literal,
       $.type_of_expression,
@@ -1130,6 +1131,20 @@ module.exports = grammar({
       optional($.argument_list),
       optional($._creation_initializer)
     )),
+
+    // Anonymous type: `New With {Key .Id = x.Id, .Name = n, x.Code}`
+    anonymous_object_creation: $ => prec(11, seq(
+      kw('New'), kw('With'), optional($._newline),
+      '{',
+      optional($._newline),
+      optional(commaSep($.anonymous_member)),
+      optional($._newline),
+      '}'
+    )),
+    anonymous_member: $ => choice(
+      seq(optional(kw('Key')), '.', field('member', $.identifier), '=', field('value', $.expression)),
+      $.expression  // inferred member name: `x.Code`
+    ),
 
     with_initializer: $ => seq(
       kw('With'),

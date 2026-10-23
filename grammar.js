@@ -608,6 +608,7 @@ module.exports = grammar({
       $.sync_lock_statement,
       $.return_statement,
       $.exit_statement,
+      $.end_statement,
       $.continue_statement,
       $.throw_statement,
       $.goto_statement,
@@ -884,6 +885,10 @@ module.exports = grammar({
 
     return_statement: $ => seq(kw('Return'), optional($.expression), $._terminator),
 
+    // A bare `End` stops the program.
+    // The token spans the whole line so the lexer can tell it from `End If`,
+    // `End Try` and the other block terminators.
+    end_statement: $ => token(seq(ci('End'), /[ \t]*/, optional(/'[^\r\n]*/), /\r?\n/)),
     exit_statement: $ => seq(kw('Exit'), choice(kw('Sub'), kw('Function'), kw('Property'), kw('Do'), kw('For'), kw('While'), kw('Select'), kw('Try')), $._terminator),
 
     continue_statement: $ => seq(kw('Continue'), choice(kw('Do'), kw('For'), kw('While')), $._terminator),

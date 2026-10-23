@@ -3167,6 +3167,10 @@
           "named": true
         },
         {
+          "type": "end_statement",
+          "named": true
+        },
+        {
           "type": "erase_statement",
           "named": true
         },
@@ -4059,6 +4063,10 @@
   },
   {
     "type": "date_literal",
+    "named": true
+  },
+  {
+    "type": "end_statement",
     "named": true
   },
   {

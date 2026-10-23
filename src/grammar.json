@@ -5146,6 +5146,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "end_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "continue_statement"
         },
         {
@@ -7580,6 +7584,38 @@
           "name": "_terminator"
         }
       ]
+    },
+    "end_statement": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[eE][nN][dD]"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[ \\t]*"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "'[^\\r\\n]*"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\r?\\n"
+          }
+        ]
+      }
     },
     "exit_statement": {
       "type": "SEQ",

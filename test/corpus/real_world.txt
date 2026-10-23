@@ -1803,6 +1803,53 @@ End Class
                 (argument_list)))))))))
 
 ==================
+String delimited by typographic quotes
+==================
+
+Public Class A
+    Sub M()
+        MessageBox(“first text”)
+        x = “a” & "b"
+    End Sub
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (call_statement
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (expression
+                      (literal
+                        (string_literal)))))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (binary_expression
+                    (expression
+                      (literal
+                        (string_literal)))
+                    (expression
+                      (literal
+                        (string_literal)))))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

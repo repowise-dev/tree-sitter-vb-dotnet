@@ -436,6 +436,58 @@ End Module
         (parameter_list)))))
 
 ==================
+Comments and blank lines between Select Case and the first Case
+==================
+
+Module M
+    Sub F(x As Integer)
+        Select Case x
+            '
+
+            ' a comment before the first case
+            Case 1
+                Return
+            Case Else
+                Return
+        End Select
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (statement
+          (select_case_statement
+            (expression
+              (identifier))
+            (comment)
+            (blank_line)
+            (blank_line)
+            (comment)
+            (blank_line)
+            (case_block
+              (case_clause
+                (expression
+                  (literal
+                    (integer_literal))))
+              (statement
+                (return_statement)))
+            (case_else_block
+              (statement
+                (return_statement)))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

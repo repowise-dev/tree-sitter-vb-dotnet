@@ -38,6 +38,7 @@ module.exports = grammar({
     [$.type, $.array_type],
     [$.if_statement, $.binary_expression],
     [$.empty_statement, $.if_statement],
+    [$.class_block],
     [$.class_block, $._member_declaration],
     [$.namespace_name, $.attribute],
     [$.namespace_name],
@@ -137,13 +138,13 @@ module.exports = grammar({
       // on their own lines — the canonical VB.NET layout is one per line, and
       // the header must keep consuming them before the member list starts.
       optional(seq(
-        optional($._terminator),
+        repeat(alias($._terminator, $.blank_line)),
         field('inherits', $.inherits_clause),
-        optional($._terminator),
+        repeat(alias($._terminator, $.blank_line)),
         optional(field('implements', $.implements_clause))
       )),
       optional(seq(
-        optional($._terminator),
+        repeat(alias($._terminator, $.blank_line)),
         field('implements', $.implements_clause)
       )),
       $._terminator,

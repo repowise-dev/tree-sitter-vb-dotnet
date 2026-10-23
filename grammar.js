@@ -488,12 +488,14 @@ module.exports = grammar({
       )
     ),
     get_accessor: $ => seq(
+      optional(field('attributes', $.attribute_block)),
       optional(field('modifiers', optional($.modifiers))),
       kw('Get'), $._terminator,
       repeat($.statement),
       kw('End'), kw('Get'), $._terminator
     ),
     set_accessor: $ => seq(
+      optional(field('attributes', $.attribute_block)),
       optional(field('modifiers', optional($.modifiers))),
       kw('Set'),
       optional(field('parameters', $.parameter_list)),  // Set can have a Value parameter

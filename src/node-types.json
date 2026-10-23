@@ -1401,6 +1401,16 @@
     "type": "get_accessor",
     "named": true,
     "fields": {
+      "attributes": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "attribute_block",
+            "named": true
+          }
+        ]
+      },
       "modifiers": {
         "multiple": false,
         "required": false,
@@ -3030,6 +3040,16 @@
     "type": "set_accessor",
     "named": true,
     "fields": {
+      "attributes": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "attribute_block",
+            "named": true
+          }
+        ]
+      },
       "modifiers": {
         "multiple": false,
         "required": false,

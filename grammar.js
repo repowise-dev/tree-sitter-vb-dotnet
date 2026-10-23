@@ -1275,7 +1275,9 @@ function commaSep1(rule) {
 
 // A comma that may be followed by a line break (implicit line continuation).
 function comma() {
-  return token(seq(',', optional(/\r?\n/)));
+  // A comma may end its line, with trailing blanks and a comment before the
+  // line break: `ByVal a As Integer, 'why` then the next parameter below.
+  return token(seq(',', optional(seq(/[ \t]*/, optional(/'[^\r\n]*/), /\r?\n/))));
 }
 
 // Case-insensitive literal helper: creates a regex that matches the given keyword in any case

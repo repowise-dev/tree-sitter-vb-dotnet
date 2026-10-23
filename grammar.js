@@ -199,7 +199,7 @@ module.exports = grammar({
       field('name', $.identifier),
       optional($.as_clause),
       $._terminator,
-      repeat($.enum_member),
+      repeat(choice($.enum_member, alias($._terminator, $.blank_line))),
       kw('End'), kw('Enum'), optional($._terminator)
     )),
     enum_member: $ => seq(

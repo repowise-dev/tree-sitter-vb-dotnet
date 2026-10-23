@@ -1044,8 +1044,22 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "SYMBOL",
-              "name": "enum_member"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "enum_member"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_terminator"
+                  },
+                  "named": true,
+                  "value": "blank_line"
+                }
+              ]
             }
           },
           {

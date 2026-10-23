@@ -572,6 +572,10 @@
           "named": true
         },
         {
+          "type": "declare_statement",
+          "named": true
+        },
+        {
           "type": "delegate_declaration",
           "named": true
         },
@@ -796,6 +800,82 @@
     "type": "continue_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "declare_statement",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "attributes": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "attribute_block",
+            "named": true
+          }
+        ]
+      },
+      "library": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "modifiers": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "modifiers",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "delegate_declaration",
@@ -1773,6 +1853,10 @@
           "named": true
         },
         {
+          "type": "declare_statement",
+          "named": true
+        },
+        {
           "type": "delegate_declaration",
           "named": true
         },
@@ -2231,6 +2315,10 @@
         },
         {
           "type": "constructor_declaration",
+          "named": true
+        },
+        {
+          "type": "declare_statement",
           "named": true
         },
         {
@@ -3330,6 +3418,10 @@
         },
         {
           "type": "constructor_declaration",
+          "named": true
+        },
+        {
+          "type": "declare_statement",
           "named": true
         },
         {

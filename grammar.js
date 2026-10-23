@@ -208,6 +208,21 @@ module.exports = grammar({
       $._terminator
     ),
 
+    // External procedure: `Declare Function F Lib "kernel32" Alias "FA" (...) As T`
+    declare_statement: $ => seq(
+      optional(field('attributes', $.attribute_block)),
+      field('modifiers', optional($.modifiers)),
+      kw('Declare'),
+      optional(choice(kw('Ansi'), kw('Unicode'), kw('Auto'))),
+      choice(kw('Sub'), kw('Function')),
+      field('name', $.identifier),
+      kw('Lib'), field('library', $.string_literal),
+      optional(seq(kw('Alias'), field('alias', $.string_literal))),
+      optional(field('parameters', $.parameter_list)),
+      optional(seq(kw('As'), field('return_type', $.type))),
+      $._terminator
+    ),
+
     // Delegate declaration (treated as a type declaration, no End block since it's a single line)
     delegate_declaration: $ => seq(
       field('modifiers', optional($.modifiers)),
@@ -300,6 +315,7 @@ module.exports = grammar({
       $.event_declaration,
       $.operator_declaration,
       $.delegate_declaration,   // nested delegate type
+      $.declare_statement,
       // Nested types. Listed one by one rather than through `type_declaration`,
       // which already carries `delegate_declaration` and would clash with it.
       $.class_block,

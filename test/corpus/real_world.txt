@@ -1118,6 +1118,65 @@ End Class
                                 (identifier)))))))))))))))))
 
 ==================
+Blank and comment lines inside an Enum
+==================
+
+Public Class A
+    Public Enum EnumKind
+        Alpha = 0
+
+        Beta = 1
+        Gamma = 3 'a note
+        'Delta = 4
+        Epsilon = 5
+        Zeta                          'TODO
+        'Eta                         'TODO remove
+    End Enum
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (enum_block
+        (modifiers
+          (modifier))
+        (identifier)
+        (enum_member
+          (identifier)
+          (expression
+            (literal
+              (integer_literal))))
+        (blank_line)
+        (enum_member
+          (identifier)
+          (expression
+            (literal
+              (integer_literal))))
+        (enum_member
+          (identifier)
+          (expression
+            (literal
+              (integer_literal)))
+          (comment))
+        (comment)
+        (blank_line)
+        (enum_member
+          (identifier)
+          (expression
+            (literal
+              (integer_literal))))
+        (enum_member
+          (identifier)
+          (comment))
+        (comment)
+        (blank_line)))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

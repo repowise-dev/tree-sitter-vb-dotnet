@@ -1508,6 +1508,87 @@ End Module
                 (end_statement)))))))))
 
 ==================
+Declare statements for external procedures
+==================
+
+Public Class A
+    Private Declare Function GetX Lib "kernel32" Alias "GetXA" (ByVal a As String, ByVal b As Integer) As Integer
+    Declare Sub Beep Lib "kernel32" ()
+    Public Declare Auto Function FindW Lib "user32" (ByVal h As IntPtr) As IntPtr
+    Sub M()
+        Dim n As Integer = GetX("a", 1)
+    End Sub
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (declare_statement
+        (modifiers
+          (modifier))
+        (identifier)
+        (string_literal)
+        (string_literal)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (type
+          (primitive_type)))
+      (declare_statement
+        (identifier)
+        (string_literal)
+        (parameter_list))
+      (declare_statement
+        (modifiers
+          (modifier))
+        (identifier)
+        (string_literal)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (namespace_name
+                  (identifier))))))
+        (type
+          (namespace_name
+            (identifier))))
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (dim_statement
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (expression
+                      (literal
+                        (string_literal))))
+                  (argument
+                    (expression
+                      (literal
+                        (integer_literal)))))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

@@ -4726,53 +4726,40 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "[oO][pP][tT][iI][oO][nN][aA][lL]"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[bB][yY][vV][aA][lL]"
-                  }
-                },
-                {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[bB][yY][rR][eE][fF]"
-                  }
-                },
-                {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[pP][aA][rR][aA][mM][aA][rR][rR][aA][yY]"
-                  }
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[oO][pP][tT][iI][oO][nN][aA][lL]"
                 }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+              },
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[bB][yY][vV][aA][lL]"
+                }
+              },
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[bB][yY][rR][eE][fF]"
+                }
+              },
+              {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[pP][aA][rR][aA][mM][aA][rR][rR][aA][yY]"
+                }
+              }
+            ]
+          }
         },
         {
           "type": "FIELD",

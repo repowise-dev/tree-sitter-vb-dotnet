@@ -555,8 +555,7 @@ module.exports = grammar({
     // ),
     parameter: $ => seq(
       optional($.attribute_block),  // Add support for attributes on parameters
-      optional(kw('Optional')),
-      optional(choice(kw('ByVal'), kw('ByRef'), kw('ParamArray'))),
+      repeat(choice(kw('Optional'), kw('ByVal'), kw('ByRef'), kw('ParamArray'))),
       field('name', $.identifier),
       optional($.array_rank_specifier),
       optional($.as_clause),

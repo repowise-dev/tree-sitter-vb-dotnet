@@ -717,6 +717,7 @@ module.exports = grammar({
 
     select_case_statement: $ => seq(
       kw('Select'), kw('Case'), field('selector', $.expression), $._terminator,
+      repeat(alias($._terminator, $.blank_line)),  // blank or comment-only lines before the first Case
       repeat($.case_block),
       optional($.case_else_block),
       kw('End'), kw('Select'), $._terminator

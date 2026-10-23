@@ -658,6 +658,7 @@ module.exports = grammar({
     compound_assignment_statement: $ => seq(
       field('left', $.left_hand_side),
       field('operator', choice('+=', '-=', '*=', '/=', '\\=', '^=', '&=', '<<=', '>>=')),
+      optional($._newline),
       field('right', $.expression),
       $._terminator
     ),

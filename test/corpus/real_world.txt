@@ -1589,6 +1589,87 @@ End Class
                         (integer_literal)))))))))))))
 
 ==================
+Line break after a compound assignment operator
+==================
+
+Public Class A
+    Sub M()
+        CType(f.Item(1).Specific, StaticText).Caption &=
+            Show(x)
+        total +=
+            1
+        s &= CType(y, String)
+    End Sub
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (compound_assignment_statement
+            (left_hand_side
+              (member_access
+                (expression
+                  (invocation
+                    (identifier)
+                    (argument_list
+                      (argument
+                        (expression
+                          (member_access
+                            (expression
+                              (invocation
+                                (member_access
+                                  (expression
+                                    (identifier))
+                                  (identifier))
+                                (argument_list
+                                  (argument
+                                    (expression
+                                      (literal
+                                        (integer_literal)))))))
+                            (identifier))))
+                      (argument
+                        (expression
+                          (identifier))))))
+                (identifier)))
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (expression
+                      (identifier))))))))
+        (statement
+          (compound_assignment_statement
+            (left_hand_side
+              (identifier))
+            (expression
+              (literal
+                (integer_literal)))))
+        (statement
+          (compound_assignment_statement
+            (left_hand_side
+              (identifier))
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (expression
+                      (identifier)))
+                  (argument
+                    (expression
+                      (identifier))))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

@@ -10195,7 +10195,7 @@
                   "members": [
                     {
                       "type": "PATTERN",
-                      "value": "[^\"\\r\\n]"
+                      "value": "[^\"]"
                     },
                     {
                       "type": "PATTERN",
@@ -10236,7 +10236,7 @@
                   "value": 2,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[^\"{}\\r\\n]+"
+                    "value": "[^\"{}]+"
                   }
                 }
               },

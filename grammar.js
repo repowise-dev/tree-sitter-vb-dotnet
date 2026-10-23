@@ -1178,7 +1178,7 @@ module.exports = grammar({
       // Regular string
       token(seq(
         '"',
-        repeat(choice(/[^"\r\n]/, /""/)),
+        repeat(choice(/[^"]/, /""/)),
         '"'
       )),
       // Interpolated string
@@ -1190,7 +1190,7 @@ module.exports = grammar({
       repeat(choice(
         // The precedence keeps an apostrophe inside the text from starting a
         // comment that would swallow the rest of the line.
-        token(prec(2, /[^"{}\r\n]+/)),
+        token(prec(2, /[^"{}]+/)),
         /""/,
         $.interpolation
       )),

@@ -1458,6 +1458,56 @@ End Class
                 (literal)))))))))
 
 ==================
+Bare End statement
+==================
+
+Public Module M
+    Sub Main()
+        If x Then
+            End
+        End If
+        Try
+            Run()
+        Catch ex As Exception
+            End
+        End Try
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (if_statement
+            (expression
+              (identifier))
+            (statement
+              (end_statement))))
+        (statement
+          (try_statement
+            (statement
+              (call_statement
+                (expression
+                  (invocation
+                    (identifier)
+                    (argument_list)))))
+            (catch_block
+              (identifier)
+              (type
+                (namespace_name
+                  (identifier)))
+              (statement
+                (end_statement)))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

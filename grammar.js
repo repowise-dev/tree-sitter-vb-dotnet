@@ -880,7 +880,10 @@ module.exports = grammar({
       $._terminator
     ),
     re_dim_clause: $ => seq(
-      '(', field('upper_bound', $.expression), optional(seq(kw('To'), $.expression)), ')'
+      '(', field('upper_bound', $.expression), optional(seq(kw('To'), $.expression)),
+      // further dimensions: `ReDim a(0 To 9, 0 To 6)`
+      repeat(seq(comma(), $.expression, optional(seq(kw('To'), $.expression)))),
+      ')'
     ),
 
     add_handler_statement: $ => seq(

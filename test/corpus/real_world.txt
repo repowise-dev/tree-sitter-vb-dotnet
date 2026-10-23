@@ -545,6 +545,49 @@ End Module
           (primitive_type))))))
 
 ==================
+Optional after ByVal or ByRef in a parameter
+==================
+
+Module M
+    Function F(ByVal a As String, ByVal Optional state As String = "",
+               ByRef Optional sSql As String = "") As Boolean
+    End Function
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (string_literal))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (string_literal)))))
+        (type
+          (primitive_type))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

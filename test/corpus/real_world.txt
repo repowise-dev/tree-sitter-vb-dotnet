@@ -1177,6 +1177,90 @@ End Class
         (blank_line)))))
 
 ==================
+Blank lines around property accessors
+==================
+
+Public Class A
+    Public Property P(i As Integer) As String
+        Get
+            Return x
+        End Get
+
+        Set(value As String)
+            x = value
+        End Set
+
+    End Property
+
+    Public Property Q As String
+
+        Get
+            Return y
+        End Get
+
+    End Property
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (property_declaration
+        (modifiers
+          (modifier))
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (as_clause
+          (type
+            (primitive_type)))
+        (get_accessor
+          (statement
+            (return_statement
+              (expression
+                (identifier)))))
+        (blank_line)
+        (set_accessor
+          (parameter_list
+            (parameter
+              (identifier)
+              (as_clause
+                (type
+                  (primitive_type)))))
+          (statement
+            (call_statement
+              (expression
+                (binary_expression
+                  (expression
+                    (identifier))
+                  (expression
+                    (identifier)))))))
+        (blank_line))
+      (blank_line)
+      (property_declaration
+        (modifiers
+          (modifier))
+        (identifier)
+        (as_clause
+          (type
+            (primitive_type)))
+        (blank_line)
+        (get_accessor
+          (statement
+            (return_statement
+              (expression
+                (identifier)))))
+        (blank_line)))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

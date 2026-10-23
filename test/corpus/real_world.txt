@@ -488,6 +488,63 @@ End Module
                 (return_statement)))))))))
 
 ==================
+A comment after the comma that ends a parameter line
+==================
+
+Module M
+    Sub F(ByVal a As Integer, 'why
+          ByVal b As Integer, 
+          Optional c As Integer = 0)
+    End Sub
+    Function G(x As String, 'c
+       y As String) As Boolean
+    End Function
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))
+            (expression
+              (literal
+                (integer_literal))))))
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type))))
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (type
+          (primitive_type))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

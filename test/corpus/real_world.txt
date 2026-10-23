@@ -900,6 +900,224 @@ End Class
                           (identifier))))))))))))))
 
 ==================
+LINQ query with In on its own line and several Order By keys
+==================
+
+Public Class A
+    Function F() As List(Of X)
+        result = (
+            From lin
+            In Rows
+            Where lin.Flag
+            Select lin
+        ).ToList
+        Return result
+    End Function
+End Class
+Public Class C
+    Function G() As List(Of X)
+        result =
+            (
+                From ic
+                In Items
+                Where ic.Hidden = True
+                Select ic
+                Order By ic.Tipo, ic.Notes Descending, ic.Id
+            ).ToList
+        Return result
+    End Function
+End Class
+Public Class D
+    Function G()
+        x = From i In Items Order By i.Tipo, i.Id Select i
+        y = (From i In Items Order By i.Tipo, i.Id)
+    End Function
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (type
+          (generic_type
+            (namespace_name
+              (identifier))
+            (type_argument_list
+              (type
+                (namespace_name
+                  (identifier))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (member_access
+                    (expression
+                      (parenthesized_expression
+                        (expression
+                          (query_expression
+                            (query_range
+                              (identifier)
+                              (expression
+                                (identifier)))
+                            (query_clause
+                              (expression
+                                (member_access
+                                  (expression
+                                    (identifier))
+                                  (identifier))))
+                            (query_clause
+                              (expression
+                                (identifier)))))))
+                    (identifier)))))))
+        (statement
+          (return_statement
+            (expression
+              (identifier)))))))
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (type
+          (generic_type
+            (namespace_name
+              (identifier))
+            (type_argument_list
+              (type
+                (namespace_name
+                  (identifier))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (member_access
+                    (expression
+                      (parenthesized_expression
+                        (expression
+                          (query_expression
+                            (query_range
+                              (identifier)
+                              (expression
+                                (identifier)))
+                            (query_clause
+                              (expression
+                                (binary_expression
+                                  (expression
+                                    (member_access
+                                      (expression
+                                        (identifier))
+                                      (identifier)))
+                                  (expression
+                                    (literal
+                                      (boolean_literal))))))
+                            (query_clause
+                              (expression
+                                (identifier)))
+                            (query_clause
+                              (query_ordering
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (identifier))))
+                              (query_ordering
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (identifier))))
+                              (query_ordering
+                                (expression
+                                  (member_access
+                                    (expression
+                                      (identifier))
+                                    (identifier)))))))))
+                    (identifier)))))))
+        (statement
+          (return_statement
+            (expression
+              (identifier)))))))
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (query_expression
+                    (query_range
+                      (identifier)
+                      (expression
+                        (identifier)))
+                    (query_clause
+                      (query_ordering
+                        (expression
+                          (member_access
+                            (expression
+                              (identifier))
+                            (identifier))))
+                      (query_ordering
+                        (expression
+                          (member_access
+                            (expression
+                              (identifier))
+                            (identifier)))))
+                    (query_clause
+                      (expression
+                        (identifier)))))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (parenthesized_expression
+                    (expression
+                      (query_expression
+                        (query_range
+                          (identifier)
+                          (expression
+                            (identifier)))
+                        (query_clause
+                          (query_ordering
+                            (expression
+                              (member_access
+                                (expression
+                                  (identifier))
+                                (identifier))))
+                          (query_ordering
+                            (expression
+                              (member_access
+                                (expression
+                                  (identifier))
+                                (identifier)))))))))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

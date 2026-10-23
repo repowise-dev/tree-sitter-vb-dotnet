@@ -661,6 +661,95 @@ End Class
               (primitive_type))))))))
 
 ==================
+Nullable type as an argument
+==================
+
+Module M
+    Sub F(r As Object)
+        Dim p = If(r.IsNull(1), CType(Nothing, Integer?), r.GetInt32(1))
+        Dim q = GetType(Integer?)
+        Dim d = CType(r, System.DateTime?)
+    End Sub
+End Module
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (module_block
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list
+          (parameter
+            (identifier)
+            (as_clause
+              (type
+                (primitive_type)))))
+        (statement
+          (dim_statement
+            (identifier)
+            (expression
+              (ternary_expression
+                (expression
+                  (invocation
+                    (member_access
+                      (expression
+                        (identifier))
+                      (identifier))
+                    (argument_list
+                      (argument
+                        (expression
+                          (literal
+                            (integer_literal)))))))
+                (expression
+                  (invocation
+                    (identifier)
+                    (argument_list
+                      (argument
+                        (expression
+                          (literal)))
+                      (argument
+                        (type
+                          (primitive_type))))))
+                (expression
+                  (invocation
+                    (member_access
+                      (expression
+                        (identifier))
+                      (identifier))
+                    (argument_list
+                      (argument
+                        (expression
+                          (literal
+                            (integer_literal)))))))))))
+        (statement
+          (dim_statement
+            (identifier)
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (type
+                      (primitive_type))))))))
+        (statement
+          (dim_statement
+            (identifier)
+            (expression
+              (invocation
+                (identifier)
+                (argument_list
+                  (argument
+                    (expression
+                      (identifier)))
+                  (argument
+                    (type
+                      (namespace_name
+                        (identifier)
+                        (identifier)))))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

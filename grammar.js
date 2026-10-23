@@ -1245,17 +1245,12 @@ module.exports = grammar({
     //   '"'
     // )),
     string_literal: $ => choice(
-      // Regular string
+      // Regular string. VB also treats the typographic quotes U+201C and U+201D
+      // as a double quote, in any combination: "text” is a valid string.
       token(seq(
-        '"',
-        repeat(choice(/[^"]/, /""/)),
-        '"'
-      )),
-      // VB also accepts the typographic quotes U+201C and U+201D as delimiters
-      token(seq(
-        /[\u201C\u201D]/,
-        repeat(choice(/[^\u201C\u201D]/, /[\u201C\u201D][\u201C\u201D]/)),
-        /[\u201C\u201D]/
+        /["\u201C\u201D]/,
+        repeat(choice(/[^"\u201C\u201D]/, /["\u201C\u201D]["\u201C\u201D]/)),
+        /["\u201C\u201D]/
       )),
       // Interpolated string
       $.interpolated_string_literal

@@ -1850,6 +1850,63 @@ End Class
                         (string_literal)))))))))))))
 
 ==================
+String opened with a straight quote and closed with a typographic one
+==================
+
+Public Class A
+    Sub M()
+        o.Text = "some text”
+        o.Tipo = 1
+        x = "say ""hi"" now"
+    End Sub
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (member_access
+                    (expression
+                      (identifier))
+                    (identifier)))
+                (expression
+                  (literal
+                    (string_literal)))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (member_access
+                    (expression
+                      (identifier))
+                    (identifier)))
+                (expression
+                  (literal
+                    (integer_literal)))))))
+        (statement
+          (call_statement
+            (expression
+              (binary_expression
+                (expression
+                  (identifier))
+                (expression
+                  (literal
+                    (string_literal)))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

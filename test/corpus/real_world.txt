@@ -1670,6 +1670,139 @@ End Class
                       (identifier))))))))))))
 
 ==================
+Anonymous types with New With
+==================
+
+Public Class A
+    Sub M()
+        Dim a = New With {Key .Id = 1, .Name = "n"}
+        For Each r In g.GroupBy(Function(x) New With
+                                    {Key .Batch = x.Batch,
+                                    Key .Tipo = x.Tipo})
+            Debug.WriteLine(r.Key.Batch)
+        Next
+        Dim b = list.Select(Function(x) New With {x.Code, .Total = 3}).ToList()
+    End Sub
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (method_declaration
+        (identifier)
+        (parameter_list)
+        (statement
+          (dim_statement
+            (identifier)
+            (expression
+              (anonymous_object_creation
+                (anonymous_member
+                  (identifier)
+                  (expression
+                    (literal
+                      (integer_literal))))
+                (anonymous_member
+                  (expression
+                    (binary_expression
+                      (expression
+                        (with_member_access
+                          (identifier)))
+                      (expression
+                        (literal
+                          (string_literal))))))))))
+        (statement
+          (for_each_statement
+            (identifier)
+            (expression
+              (invocation
+                (member_access
+                  (expression
+                    (identifier))
+                  (identifier))
+                (argument_list
+                  (argument
+                    (expression
+                      (lambda_expression
+                        (lambda_parameter
+                          (identifier))
+                        (expression
+                          (anonymous_object_creation
+                            (anonymous_member
+                              (identifier)
+                              (expression
+                                (member_access
+                                  (expression
+                                    (identifier))
+                                  (identifier))))
+                            (anonymous_member
+                              (identifier)
+                              (expression
+                                (member_access
+                                  (expression
+                                    (identifier))
+                                  (identifier))))))))))))
+            (statement
+              (call_statement
+                (expression
+                  (invocation
+                    (member_access
+                      (expression
+                        (identifier))
+                      (identifier))
+                    (argument_list
+                      (argument
+                        (expression
+                          (member_access
+                            (expression
+                              (member_access
+                                (expression
+                                  (identifier))
+                                (identifier)))
+                            (identifier)))))))))))
+        (statement
+          (dim_statement
+            (identifier)
+            (expression
+              (invocation
+                (member_access
+                  (expression
+                    (invocation
+                      (member_access
+                        (expression
+                          (identifier))
+                        (identifier))
+                      (argument_list
+                        (argument
+                          (expression
+                            (lambda_expression
+                              (lambda_parameter
+                                (identifier))
+                              (expression
+                                (anonymous_object_creation
+                                  (anonymous_member
+                                    (expression
+                                      (member_access
+                                        (expression
+                                          (identifier))
+                                        (identifier))))
+                                  (anonymous_member
+                                    (expression
+                                      (binary_expression
+                                        (expression
+                                          (with_member_access
+                                            (identifier)))
+                                        (expression
+                                          (literal
+                                            (integer_literal))))))))))))))
+                  (identifier))
+                (argument_list)))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

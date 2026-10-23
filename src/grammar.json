@@ -2819,6 +2819,28 @@
         }
       ]
     },
+    "_nullable_type_argument": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "primitive_type"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "namespace_name"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "?"
+        }
+      ]
+    },
     "type": {
       "type": "SEQ",
       "members": [
@@ -9415,6 +9437,15 @@
         {
           "type": "SYMBOL",
           "name": "expression"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_nullable_type_argument"
+          },
+          "named": true,
+          "value": "type"
         },
         {
           "type": "SEQ",

@@ -365,6 +365,11 @@ module.exports = grammar({
       seq($.namespace_name, optional($.type_argument_list))
     ),
 
+    _nullable_type_argument: $ => seq(
+      choice($.primitive_type, $.namespace_name),
+      '?'
+    ),
+
     // Type (for variables, parameters, return types, etc.)
     type: $ => seq(
       choice(
@@ -1033,6 +1038,8 @@ module.exports = grammar({
     ),
     argument: $ => choice(
       $.expression,
+      // A nullable type used as a value: `CType(x, Integer?)`, `GetType(Date?)`
+      alias($._nullable_type_argument, $.type),
       seq(field('name', $.identifier), ':', '=', $.expression)  // named argument (Name:=Expr)
     ),
 

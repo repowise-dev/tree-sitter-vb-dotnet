@@ -1261,6 +1261,128 @@ End Class
         (blank_line)))))
 
 ==================
+Attributes on property accessors
+==================
+
+Public Class A
+    <Global.System.ComponentModel.Design.HelpKeyword("My.Request")> _
+    Friend ReadOnly Property Request() As String
+        <Global.System.Diagnostics.DebuggerHidden()> _
+        Get
+            Dim c As String = x
+            If c IsNot Nothing Then
+                Return c
+            End If
+            Return Nothing
+        End Get
+    End Property
+    Public Property Z As String
+        Get
+            Return y
+        End Get
+        <DebuggerHidden()>
+        Set(value As String)
+            y = value
+        End Set
+    End Property
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (property_declaration
+        (attribute_block
+          (attribute
+            (namespace_name
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier))
+            (argument_list
+              (argument
+                (expression
+                  (literal
+                    (string_literal)))))))
+        (modifiers
+          (modifier)
+          (modifier))
+        (identifier)
+        (parameter_list)
+        (as_clause
+          (type
+            (primitive_type)))
+        (get_accessor
+          (attribute_block
+            (attribute
+              (namespace_name
+                (identifier)
+                (identifier)
+                (identifier)
+                (identifier))
+              (argument_list)))
+          (statement
+            (dim_statement
+              (identifier)
+              (as_clause
+                (type
+                  (primitive_type)))
+              (expression
+                (identifier))))
+          (statement
+            (if_statement
+              (expression
+                (binary_expression
+                  (expression
+                    (identifier))
+                  (expression
+                    (literal))))
+              (statement
+                (return_statement
+                  (expression
+                    (identifier))))))
+          (statement
+            (return_statement
+              (expression
+                (literal))))))
+      (property_declaration
+        (modifiers
+          (modifier))
+        (identifier)
+        (as_clause
+          (type
+            (primitive_type)))
+        (get_accessor
+          (statement
+            (return_statement
+              (expression
+                (identifier)))))
+        (set_accessor
+          (attribute_block
+            (attribute
+              (identifier)
+              (argument_list)))
+          (parameter_list
+            (parameter
+              (identifier)
+              (as_clause
+                (type
+                  (primitive_type)))))
+          (statement
+            (call_statement
+              (expression
+                (binary_expression
+                  (expression
+                    (identifier))
+                  (expression
+                    (identifier)))))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

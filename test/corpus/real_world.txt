@@ -1383,6 +1383,81 @@ End Class
                     (identifier)))))))))))
 
 ==================
+Stacked attribute lists on a member
+==================
+
+Public Class A
+    ''' <summary>
+    ''' Returns Request object.
+    ''' </summary>
+    <Global.System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")> _
+    <Global.System.ComponentModel.Design.HelpKeyword("My.Request")> _
+    Friend ReadOnly Property Request() As String
+        Get
+            Return Nothing
+        End Get
+    End Property
+End Class
+---
+
+(source_file
+  (blank_line)
+  (type_declaration
+    (class_block
+      (modifiers
+        (modifier))
+      (identifier)
+      (comment)
+      (blank_line)
+      (comment)
+      (blank_line)
+      (comment)
+      (blank_line)
+      (property_declaration
+        (attribute_block
+          (attribute
+            (namespace_name
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier))
+            (argument_list
+              (argument
+                (expression
+                  (literal
+                    (string_literal))))
+              (argument
+                (expression
+                  (literal
+                    (string_literal))))))
+          (attribute
+            (namespace_name
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier)
+              (identifier))
+            (argument_list
+              (argument
+                (expression
+                  (literal
+                    (string_literal)))))))
+        (modifiers
+          (modifier)
+          (modifier))
+        (identifier)
+        (parameter_list)
+        (as_clause
+          (type
+            (primitive_type)))
+        (get_accessor
+          (statement
+            (return_statement
+              (expression
+                (literal)))))))))
+
+==================
 A file that ends without a trailing newline
 ==================
 

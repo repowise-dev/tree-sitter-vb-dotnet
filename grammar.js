@@ -251,7 +251,12 @@ module.exports = grammar({
     ),
 
     // Attributes: <...> blocks attached to declarations
+    // One or more stacked `<...>` lists: `<A()> _` then `<B()> _`.
     attribute_block: $ => prec.right(seq(
+      $._attribute_list,
+      repeat($._attribute_list)
+    )),
+    _attribute_list: $ => prec.right(seq(
       '<',
       optional($._newline),
       commaSep1($.attribute),

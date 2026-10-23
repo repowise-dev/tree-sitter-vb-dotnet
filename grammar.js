@@ -365,10 +365,21 @@ module.exports = grammar({
       seq($.namespace_name, optional($.type_argument_list))
     ),
 
-    _nullable_type_argument: $ => seq(
-      choice($.primitive_type, $.namespace_name),
-      '?'
+    // The primitive name and `?` form one token: offering a bare primitive_type
+    // at the start of an argument would make `String.Empty` unparseable.
+    _nullable_type_argument: $ => choice(
+      seq(alias($._nullable_primitive, $.primitive_type)),
+      seq($.namespace_name, '?')
     ),
+    _nullable_primitive: $ => token(seq(
+      choice(
+        kw('Boolean'), kw('Byte'), kw('Short'), kw('Integer'), kw('Long'),
+        kw('Single'), kw('Double'), kw('Decimal'),
+        kw('Char'), kw('String'),
+        kw('Object'), kw('Date')
+      ),
+      '?'
+    )),
 
     // Type (for variables, parameters, return types, etc.)
     type: $ => seq(

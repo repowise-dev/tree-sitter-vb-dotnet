@@ -11696,6 +11696,38 @@
           }
         },
         {
+          "type": "TOKEN",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[\\u201C\\u201D]"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[^\\u201C\\u201D]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "[\\u201C\\u201D][\\u201C\\u201D]"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "PATTERN",
+                "value": "[\\u201C\\u201D]"
+              }
+            ]
+          }
+        },
+        {
           "type": "SYMBOL",
           "name": "interpolated_string_literal"
         }

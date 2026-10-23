@@ -2679,6 +2679,10 @@
           "named": true
         },
         {
+          "type": "blank_line",
+          "named": true
+        },
+        {
           "type": "get_accessor",
           "named": true
         },

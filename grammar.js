@@ -480,8 +480,9 @@ module.exports = grammar({
         // Property with Get/Set accessors:
         seq(
           $._terminator,
-          optional($.get_accessor),
-          optional($.set_accessor),
+          repeat(alias($._terminator, $.blank_line)),
+          optional(seq($.get_accessor, repeat(alias($._terminator, $.blank_line)))),
+          optional(seq($.set_accessor, repeat(alias($._terminator, $.blank_line)))),
           kw('End'), kw('Property'), $._terminator
         )
       )
